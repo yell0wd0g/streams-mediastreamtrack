@@ -1448,6 +1448,7 @@ pre.idl.highlight { color: #708090; }
      <dd><a class="u-url" href="https://wicg.github.io/streams-mediastreamtrack">https://wicg.github.io/streams-mediastreamtrack</a>
      <dt>Issue Tracking:
      <dd><a href="https://github.com/wicg/streams-mediastreamtrack/issues/">GitHub</a>
+     <dd><a href="#issues-index">Inline In Spec</a>
      <dt class="editor">Editors:
      <dd class="editor p-author h-card vcard" data-editor-id="82825"><a class="p-name fn u-email email" href="mailto:mcasas@google.com">Miguel Casas-Sanchez</a> (<span class="p-org org">Google Inc.</span>)
      <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:ricea@google.com">Adam Rice</a> (<span class="p-org org">Google Inc.</span>)
@@ -1484,7 +1485,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      </ol>
     <li><a href="#api"><span class="secno">2</span> <span class="content"><code class="idl"><span>MediaStreamTrack</span></code> API extension</span></a>
     <li>
-     <a href="#api0"><span class="secno">3</span> <span class="content">VideoFrame</span></a>
+     <a href="#videoframe"><span class="secno">3</span> <span class="content">VideoFrame</span></a>
      <ol class="toc">
       <li><a href="#pixelformat-section"><span class="secno">3.1</span> <span class="content"><code class="idl"><span>PixelFormat</span></code> #</span></a>
      </ol>
@@ -1504,18 +1505,24 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <a href="#references"><span class="secno"></span> <span class="content">References</span></a>
      <ol class="toc">
       <li><a href="#normative"><span class="secno"></span> <span class="content">Normative References</span></a>
+      <li><a href="#informative"><span class="secno"></span> <span class="content">Informative References</span></a>
      </ol>
     <li><a href="#idl-index"><span class="secno"></span> <span class="content">IDL Index</span></a>
+    <li><a href="#issues-index"><span class="secno"></span> <span class="content">Issues Index</span></a>
    </ol>
   </nav>
   <main>
    <h2 class="heading settled" data-level="1" id="introduction"><span class="secno">1. </span><span class="content">Introduction</span><a class="self-link" href="#introduction"></a></h2>
-   <p><code class="idl"><a data-link-type="idl" href="https://streams.spec.whatwg.org/#stream">Streams</a></code> are designed to provide real time data with powerful semantics.</p>
-   <p><code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTracks</a></code> are opaque handles to Real-Time video/audio transported in
-the browser. Users can access this data via reflexion on intermediate HTML
-elements such as &lt;canvas>, or via offline processors such as <code class="idl"><a data-link-type="idl">MediaRecorder</a></code>.</p>
-   <p>This spec describes the ways in which <code class="idl"><a data-link-type="idl" href="https://streams.spec.whatwg.org/#readable-stream">ReadableStreams</a></code> can be created out of <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTracks</a></code>.</p>
+   <p><code class="idl"><a data-link-type="idl" href="https://streams.spec.whatwg.org/#stream">Streams</a></code> are designed to provide real time data with powerful
+semantics (<a data-link-type="biblio" href="#biblio-streams">[streams]</a>).</p>
+   <p><code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTracks</a></code> <a data-link-type="biblio" href="#biblio-getusermedia">[getusermedia]</a> are opaque handles to
+Real-Time video/audio transported in the browser. Users can access this data via
+reflexion on intermediate HTML elements such as &lt;canvas>, or via offline
+processing (generated, e.g. using <a data-link-type="biblio" href="#biblio-mediastream-recording">[mediastream-recording]</a>).</p>
+   <p>This spec describes the ways in which <code class="idl"><a data-link-type="idl" href="https://streams.spec.whatwg.org/#readable-stream">ReadableStreams</a></code> can be
+created out of <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTracks</a></code>.</p>
    <h3 class="heading settled" data-level="1.1" id="use-cases"><span class="secno">1.1. </span><span class="content">Use cases</span><a class="self-link" href="#use-cases"></a></h3>
+   <p>Blabla</p>
    <h2 class="heading settled" data-level="2" id="api"><span class="secno">2. </span><span class="content"><code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTrack</a></code> API extension</span><a class="self-link" href="#api"></a></h2>
 <pre class="idl highlight def"><span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTrack</a> {
   // |any| should be ReadableStream, but that is not an idl type.
@@ -1528,31 +1535,47 @@ elements such as &lt;canvas>, or via offline processors such as <code class="idl
      Constructs a <code class="idl"><a data-link-type="idl" href="https://streams.spec.whatwg.org/#readable-stream">ReadableStream</a></code> out of the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTrack</a></code>. 
      <div class="note" role="note"> This is a note. </div>
    </dl>
-   <h2 class="heading settled" data-level="3" id="api0"><span class="secno">3. </span><span class="content">VideoFrame</span><a class="self-link" href="#api0"></a></h2>
-<pre class="idl highlight def"><span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="videoframe"><code>VideoFrame</code></dfn> {
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://tc39.github.io/ecma262/#sec-array-objects">Array</a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="Array" href="#dom-videoframe-plane" id="ref-for-dom-videoframe-plane-1">plane</a>;
+   <h2 class="heading settled" data-level="3" id="videoframe"><span class="secno">3. </span><span class="content">VideoFrame</span><a class="self-link" href="#videoframe"></a></h2>
+<pre class="idl highlight def"><span class="kt">typedef</span> (<a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-Uint8Array"><span class="kt">Uint8Array</span></a> <span class="kt">or</span> <span class="kt">FrozenArray</span>&lt;<a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-Uint8Array"><span class="kt">Uint8Array</span></a>>) <dfn class="nv dfn-paneled idl-code" data-dfn-type="typedef" data-export="" id="typedefdef-videoframedataarray"><code>VideoFrameDataArray</code></dfn>;
+
+<span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="videoframe0"><code>VideoFrame</code></dfn> {
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#typedefdef-videoframedataarray" id="ref-for-typedefdef-videoframedataarray-1">VideoFrameDataArray</a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="VideoFrameDataArray" href="#dom-videoframe-data" id="ref-for-dom-videoframe-data-1">data</a>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long"><span class="kt">unsigned</span> <span class="kt">long</span></a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="unsigned long" href="#dom-videoframe-width" id="ref-for-dom-videoframe-width-1">width</a>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long"><span class="kt">unsigned</span> <span class="kt">long</span></a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="unsigned long" href="#dom-videoframe-height" id="ref-for-dom-videoframe-height-1">height</a>;
   <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#enumdef-pixelformat" id="ref-for-enumdef-pixelformat-1">PixelFormat</a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="PixelFormat" href="#dom-videoframe-format" id="ref-for-dom-videoframe-format-1">format</a>;
+
   <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="DOMHighResTimeStamp" href="#dom-videoframe-timecode" id="ref-for-dom-videoframe-timecode-1">timecode</a>;
 };
 </pre>
+   <div class="issue" id="issue-daedc311"><a class="self-link" href="#issue-daedc311"></a> When <code class="idl"><a data-link-type="idl" href="#dom-videoframe-format" id="ref-for-dom-videoframe-format-2">format</a></code> == <code class="idl"><a data-link-type="idl" href="#dom-pixelformat-rgba" id="ref-for-dom-pixelformat-rgba-1">rgba</a></code>, <code class="idl"><a data-link-type="idl" href="#videoframe0" id="ref-for-videoframe0-1">VideoFrame</a></code> is just an <a href="https://www.w3.org/TR/2dcontext/#imagedata">HTML Canvas 2D Context §imagedata</a> with a <code class="idl"><a data-link-type="idl" href="#dom-videoframe-timecode" id="ref-for-dom-videoframe-timecode-2">timecode</a></code>.  How to represent that in WebIDL? </div>
    <dl class="domintro">
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="VideoFrame" data-dfn-type="attribute" data-export="" id="dom-videoframe-plane"><code><code>plane</code></code></dfn>, <span> of type <a data-link-type="idl-name" href="https://tc39.github.io/ecma262/#sec-array-objects">Array</a>, readonly</span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="VideoFrame" data-dfn-type="attribute" data-export="" id="dom-videoframe-data"><code><code>data</code></code></dfn>, <span> of type <a data-link-type="idl-name" href="#typedefdef-videoframedataarray" id="ref-for-typedefdef-videoframedataarray-2">VideoFrameDataArray</a>, readonly</span>
     <dd>
+     <div class="issue" id="issue-511c0c65"><a class="self-link" href="#issue-511c0c65"></a> Consider using <a href="https://heycam.github.io/webidl/#ArrayBufferView">Web IDL §ArrayBufferView</a> ("used to represent objects that
+    provide a view on to an <a href="https://heycam.github.io/webidl/#ArrayBuffer">Web IDL §ArrayBuffer</a>.") -- it might expose too
+    many format combinations though. </div>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="VideoFrame" data-dfn-type="attribute" data-export="" id="dom-videoframe-width"><code><code>width</code></code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-unsigned-long">unsigned long</a>, readonly</span>
+    <dd>Actual horizontal dimension of the data in the <code class="idl"><a data-link-type="idl" href="#dom-videoframe-data" id="ref-for-dom-videoframe-data-2">data</a></code> object, in
+  pixels.
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="VideoFrame" data-dfn-type="attribute" data-export="" id="dom-videoframe-height"><code><code>height</code></code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-unsigned-long">unsigned long</a>, readonly</span>
+    <dd>Actual vertical dimension of the data in the <code class="idl"><a data-link-type="idl" href="#dom-videoframe-data" id="ref-for-dom-videoframe-data-3">data</a></code> object, in
+  pixels.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="VideoFrame" data-dfn-type="attribute" data-export="" id="dom-videoframe-format"><code><code>format</code></code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-pixelformat" id="ref-for-enumdef-pixelformat-2">PixelFormat</a>, readonly</span>
-    <dd>This attribute specifies the concrete pixel format of <code class="idl"><a data-link-type="idl" href="#dom-videoframe-plane" id="ref-for-dom-videoframe-plane-2">plane</a></code>; <code class="idl"><a data-link-type="idl" href="#dom-pixelformat-rgba" id="ref-for-dom-pixelformat-rgba-1">rgba</a></code> is equivalent to the one of <a href="https://www.w3.org/TR/2dcontext/#imagedata">HTML Canvas 2D Context §imagedata</a>.
+    <dd>This attribute specifies the concrete pixel format of <code class="idl"><a data-link-type="idl" href="#dom-videoframe-data" id="ref-for-dom-videoframe-data-4">data</a></code>; <code class="idl"><a data-link-type="idl" href="#dom-pixelformat-rgba" id="ref-for-dom-pixelformat-rgba-2">rgba</a></code> is equivalent to the one of <a href="https://www.w3.org/TR/2dcontext/#imagedata">HTML Canvas 2D Context §imagedata</a>.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="VideoFrame" data-dfn-type="attribute" data-export="" id="dom-videoframe-timecode"><code><code>timecode</code></code></dfn>, <span> of type <a data-link-type="idl-name" href="https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>, readonly</span>
     <dd>The difference between the timestamp of the first generated chunk of data
-  in <code class="idl"><a data-link-type="idl" href="#videoframe" id="ref-for-videoframe-1">VideoFrame</a></code> and the timestamp of the first chunk in the first <code class="idl"><a data-link-type="idl" href="#videoframe" id="ref-for-videoframe-2">VideoFrame</a></code> produced by this reader.  Note that the <code class="idl"><a data-link-type="idl" href="#dom-videoframe-timecode" id="ref-for-dom-videoframe-timecode-2">timecode</a></code> in the first produced <code class="idl"><a data-link-type="idl" href="#videoframe" id="ref-for-videoframe-3">VideoFrame</a></code> does not need to be zero. 
+  in <code class="idl"><a data-link-type="idl" href="#videoframe0" id="ref-for-videoframe0-2">VideoFrame</a></code> and the timestamp of the first chunk in the first <code class="idl"><a data-link-type="idl" href="#videoframe0" id="ref-for-videoframe0-3">VideoFrame</a></code> produced by this reader.  Note that the <code class="idl"><a data-link-type="idl" href="#dom-videoframe-timecode" id="ref-for-dom-videoframe-timecode-3">timecode</a></code> in the first produced <code class="idl"><a data-link-type="idl" href="#videoframe0" id="ref-for-videoframe0-4">VideoFrame</a></code> does not need to be zero. 
    </dl>
    <h3 class="heading settled" data-level="3.1" id="pixelformat-section"><span class="secno">3.1. </span><span class="content"><code class="idl"><a data-link-type="idl" href="#enumdef-pixelformat" id="ref-for-enumdef-pixelformat-3">PixelFormat</a></code> #</span><a class="self-link" href="#pixelformat-section"></a></h3>
 <pre class="idl highlight def"><span class="kt">enum</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="enum" data-export="" id="enumdef-pixelformat"><code>PixelFormat</code></dfn> {
-  <a class="s idl-code" data-link-type="enum-value" href="#dom-pixelformat-rgba" id="ref-for-dom-pixelformat-rgba-2">"rgba"</a>,
+  <a class="s idl-code" data-link-type="enum-value" href="#dom-pixelformat-rgba" id="ref-for-dom-pixelformat-rgba-3">"rgba"</a>,
   <a class="s idl-code" data-link-type="enum-value" href="#dom-pixelformat-yuv420" id="ref-for-dom-pixelformat-yuv420-1">"yuv420"</a>,
 };
 </pre>
    <dl class="domintro">
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="PixelFormat" data-dfn-type="enum-value" data-export="" id="dom-pixelformat-rgba"><code><code>rgba</code></code></dfn>
-    <dd> Specifies one-dimensional data array in RGBA order, as integers in the range 0 to 255. This is the same as <a href="https://www.w3.org/TR/2dcontext/#imagedata">HTML Canvas 2D Context §imagedata</a>. 
+    <dd> Specifies one-dimensional data array in RGBA order, as integers in the range
+    0 to 255. This is the same format as the one in <a href="https://www.w3.org/TR/2dcontext/#imagedata">HTML Canvas 2D Context §imagedata</a>. 
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="PixelFormat" data-dfn-type="enum-value" data-export="" id="dom-pixelformat-yuv420"><code><code>yuv420</code></code></dfn>
     <dd>
    </dl>
@@ -1737,37 +1760,44 @@ track<span class="p">.</span>readable<span class="p">.</span>pipeTo<span class="
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
+   <li><a href="#dom-videoframe-data">data</a><span>, in §3</span>
    <li><a href="#dom-videoframe-format">format</a><span>, in §3</span>
+   <li><a href="#dom-videoframe-height">height</a><span>, in §3</span>
    <li><a href="#enumdef-pixelformat">PixelFormat</a><span>, in §3.1</span>
-   <li><a href="#dom-videoframe-plane">plane</a><span>, in §3</span>
    <li><a href="#dom-mediastreamtrack-readable">readable</a><span>, in §2</span>
    <li><a href="#dom-pixelformat-rgba">rgba</a><span>, in §3.1</span>
    <li><a href="#dom-videoframe-timecode">timecode</a><span>, in §3</span>
-   <li><a href="#videoframe">VideoFrame</a><span>, in §3</span>
+   <li><a href="#videoframe0">VideoFrame</a><span>, in §3</span>
+   <li><a href="#typedefdef-videoframedataarray">VideoFrameDataArray</a><span>, in §3</span>
+   <li><a href="#dom-videoframe-width">width</a><span>, in §3</span>
    <li><a href="#dom-pixelformat-yuv420">yuv420</a><span>, in §3.1</span>
   </ul>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
    <li>
-    <a data-link-type="biblio">[ECMASCRIPT]</a> defines the following terms:
-    <ul>
-     <li><a href="https://tc39.github.io/ecma262/#sec-array-objects">Array</a>
-    </ul>
-   <li>
     <a data-link-type="biblio">[WebIDL]</a> defines the following terms:
     <ul>
+     <li><a href="https://heycam.github.io/webidl/#idl-Uint8Array">Uint8Array</a>
      <li><a href="https://heycam.github.io/webidl/#idl-any">any</a>
+     <li><a href="https://heycam.github.io/webidl/#idl-unsigned-long">unsigned long</a>
     </ul>
   </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
-   <dt id="biblio-ecmascript">[ECMASCRIPT]
-   <dd><a href="https://tc39.github.io/ecma262/">ECMAScript Language Specification</a>. URL: <a href="https://tc39.github.io/ecma262/">https://tc39.github.io/ecma262/</a>
+   <dt id="biblio-getusermedia">[GETUSERMEDIA]
+   <dd>Daniel Burnett; et al. <a href="https://www.w3.org/TR/mediacapture-streams/">Media Capture and Streams</a>. URL: <a href="https://www.w3.org/TR/mediacapture-streams/">https://www.w3.org/TR/mediacapture-streams/</a>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
+   <dt id="biblio-streams">[STREAMS]
+   <dd>Domenic Denicola; 吉野剛史 (Takeshi Yoshino). <a href="https://streams.spec.whatwg.org/">Streams Standard</a>. Living Standard. URL: <a href="https://streams.spec.whatwg.org/">https://streams.spec.whatwg.org/</a>
    <dt id="biblio-webidl">[WebIDL]
    <dd>Cameron McCormack; Boris Zbarsky; Tobie Langel. <a href="https://heycam.github.io/webidl/">Web IDL</a>. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
+  </dl>
+  <h3 class="no-num no-ref heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
+  <dl>
+   <dt id="biblio-mediastream-recording">[MEDIASTREAM-RECORDING]
+   <dd>Miguel Casas-sanchez; James Barnett; Travis Leithead. <a href="https://www.w3.org/TR/mediastream-recording/">MediaStream Recording</a>. URL: <a href="https://www.w3.org/TR/mediastream-recording/">https://www.w3.org/TR/mediastream-recording/</a>
   </dl>
   <h2 class="no-num no-ref heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
 <pre class="idl highlight def"><span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTrack</a> {
@@ -1775,9 +1805,14 @@ track<span class="p">.</span>readable<span class="p">.</span>pipeTo<span class="
   [<a class="nv idl-code" data-link-type="extended-attribute">CallWith</a>=<a class="n" data-link-type="idl-name">ScriptState</a>] <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">any</span> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="any" href="#dom-mediastreamtrack-readable">readable</a>;
 };
 
-<span class="kt">interface</span> <a class="nv" href="#videoframe"><code>VideoFrame</code></a> {
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://tc39.github.io/ecma262/#sec-array-objects">Array</a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="Array" href="#dom-videoframe-plane">plane</a>;
+<span class="kt">typedef</span> (<a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-Uint8Array"><span class="kt">Uint8Array</span></a> <span class="kt">or</span> <span class="kt">FrozenArray</span>&lt;<a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-Uint8Array"><span class="kt">Uint8Array</span></a>>) <a class="nv" href="#typedefdef-videoframedataarray"><code>VideoFrameDataArray</code></a>;
+
+<span class="kt">interface</span> <a class="nv" href="#videoframe0"><code>VideoFrame</code></a> {
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#typedefdef-videoframedataarray">VideoFrameDataArray</a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="VideoFrameDataArray" href="#dom-videoframe-data">data</a>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long"><span class="kt">unsigned</span> <span class="kt">long</span></a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="unsigned long" href="#dom-videoframe-width">width</a>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long"><span class="kt">unsigned</span> <span class="kt">long</span></a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="unsigned long" href="#dom-videoframe-height">height</a>;
   <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#enumdef-pixelformat">PixelFormat</a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="PixelFormat" href="#dom-videoframe-format">format</a>;
+
   <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="DOMHighResTimeStamp" href="#dom-videoframe-timecode">timecode</a>;
 };
 
@@ -1787,34 +1822,59 @@ track<span class="p">.</span>readable<span class="p">.</span>pipeTo<span class="
 };
 
 </pre>
+  <h2 class="no-num no-ref heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
+  <div style="counter-reset:issue">
+   <div class="issue"> When <code class="idl"><a data-link-type="idl" href="#dom-videoframe-format">format</a></code> == <code class="idl"><a data-link-type="idl" href="#dom-pixelformat-rgba">rgba</a></code>, <code class="idl"><a data-link-type="idl" href="#videoframe0">VideoFrame</a></code> is just an <a href="https://www.w3.org/TR/2dcontext/#imagedata">HTML Canvas 2D Context §imagedata</a> with a <code class="idl"><a data-link-type="idl" href="#dom-videoframe-timecode">timecode</a></code>.  How to represent that in WebIDL? <a href="#issue-daedc311"> ↵ </a></div>
+   <div class="issue"> Consider using <a href="https://heycam.github.io/webidl/#ArrayBufferView">Web IDL §ArrayBufferView</a> ("used to represent objects that
+    provide a view on to an <a href="https://heycam.github.io/webidl/#ArrayBuffer">Web IDL §ArrayBuffer</a>.") -- it might expose too
+    many format combinations though. <a href="#issue-511c0c65"> ↵ </a></div>
+  </div>
   <aside class="dfn-panel" data-for="dom-mediastreamtrack-readable">
    <b><a href="#dom-mediastreamtrack-readable">#dom-mediastreamtrack-readable</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-mediastreamtrack-readable-1">2. MediaStreamTrack API extension</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="videoframe">
-   <b><a href="#videoframe">#videoframe</a></b><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="typedefdef-videoframedataarray">
+   <b><a href="#typedefdef-videoframedataarray">#typedefdef-videoframedataarray</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-videoframe-1">3. VideoFrame</a> <a href="#ref-for-videoframe-2">(2)</a> <a href="#ref-for-videoframe-3">(3)</a>
+    <li><a href="#ref-for-typedefdef-videoframedataarray-1">3. VideoFrame</a> <a href="#ref-for-typedefdef-videoframedataarray-2">(2)</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="dom-videoframe-plane">
-   <b><a href="#dom-videoframe-plane">#dom-videoframe-plane</a></b><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="videoframe0">
+   <b><a href="#videoframe0">#videoframe0</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-videoframe-plane-1">3. VideoFrame</a> <a href="#ref-for-dom-videoframe-plane-2">(2)</a>
+    <li><a href="#ref-for-videoframe0-1">3. VideoFrame</a> <a href="#ref-for-videoframe0-2">(2)</a> <a href="#ref-for-videoframe0-3">(3)</a> <a href="#ref-for-videoframe0-4">(4)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-videoframe-data">
+   <b><a href="#dom-videoframe-data">#dom-videoframe-data</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-videoframe-data-1">3. VideoFrame</a> <a href="#ref-for-dom-videoframe-data-2">(2)</a> <a href="#ref-for-dom-videoframe-data-3">(3)</a> <a href="#ref-for-dom-videoframe-data-4">(4)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-videoframe-width">
+   <b><a href="#dom-videoframe-width">#dom-videoframe-width</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-videoframe-width-1">3. VideoFrame</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-videoframe-height">
+   <b><a href="#dom-videoframe-height">#dom-videoframe-height</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-videoframe-height-1">3. VideoFrame</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-videoframe-format">
    <b><a href="#dom-videoframe-format">#dom-videoframe-format</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-videoframe-format-1">3. VideoFrame</a>
+    <li><a href="#ref-for-dom-videoframe-format-1">3. VideoFrame</a> <a href="#ref-for-dom-videoframe-format-2">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-videoframe-timecode">
    <b><a href="#dom-videoframe-timecode">#dom-videoframe-timecode</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-videoframe-timecode-1">3. VideoFrame</a> <a href="#ref-for-dom-videoframe-timecode-2">(2)</a>
+    <li><a href="#ref-for-dom-videoframe-timecode-1">3. VideoFrame</a> <a href="#ref-for-dom-videoframe-timecode-2">(2)</a> <a href="#ref-for-dom-videoframe-timecode-3">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="enumdef-pixelformat">
@@ -1827,8 +1887,8 @@ track<span class="p">.</span>readable<span class="p">.</span>pipeTo<span class="
   <aside class="dfn-panel" data-for="dom-pixelformat-rgba">
    <b><a href="#dom-pixelformat-rgba">#dom-pixelformat-rgba</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-pixelformat-rgba-1">3. VideoFrame</a>
-    <li><a href="#ref-for-dom-pixelformat-rgba-2">3.1. PixelFormat #</a>
+    <li><a href="#ref-for-dom-pixelformat-rgba-1">3. VideoFrame</a> <a href="#ref-for-dom-pixelformat-rgba-2">(2)</a>
+    <li><a href="#ref-for-dom-pixelformat-rgba-3">3.1. PixelFormat #</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-pixelformat-yuv420">

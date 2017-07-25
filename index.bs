@@ -32,17 +32,20 @@ table td, table th {
 
 # Introduction # {#introduction}
 
-{{Stream|Streams}} are designed to provide real time data with powerful semantics.
+{{Stream|Streams}} are designed to provide real time data with powerful
+semantics ([[!streams]]).
 
-{{MediaStreamTrack|MediaStreamTracks}} are opaque handles to Real-Time video/audio transported in
-the browser. Users can access this data via reflexion on intermediate HTML
-elements such as &ltcanvas>, or via offline processors such as
-{{MediaRecorder}}.
+{{MediaStreamTrack|MediaStreamTracks}} [[!getusermedia]] are opaque handles to
+Real-Time video/audio transported in the browser. Users can access this data via
+reflexion on intermediate HTML elements such as &ltcanvas>, or via offline
+processing (generated, e.g. using [[mediastream-recording]]).
 
-This spec describes the ways in which {{ReadableStream|ReadableStreams}} can be created out of
-{{MediaStreamTrack|MediaStreamTracks}}.
+This spec describes the ways in which {{ReadableStream|ReadableStreams}} can be
+created out of {{MediaStreamTrack|MediaStreamTracks}}.
 
 ## Use cases
+
+Blabla
 
 # {{MediaStreamTrack}} API extension # {#api}
 
@@ -62,21 +65,47 @@ partial interface MediaStreamTrack {
   </dd>
 </dl>
 
-# VideoFrame # {#api}
+# VideoFrame # {#videoframe}
 
 <pre class="idl">
+typedef (Uint8Array or FrozenArray&lt;Uint8Array>) VideoFrameDataArray;
+
 interface VideoFrame {
-  readonly attribute Array<ArrayBuffer> plane;
+  readonly attribute VideoFrameDataArray data;
+  readonly attribute unsigned long width;
+  readonly attribute unsigned long height;
   readonly attribute PixelFormat format;
+
   readonly attribute DOMHighResTimeStamp timecode;
 };
 </pre>
 
+<div class="issue">
+  When {{format}} == {{rgba}}, {{VideoFrame}} is just an [[2dcontext#imagedata]]
+  with a {{timecode}}.  How to represent that in WebIDL?
+</div>
+
 <dl class="domintro">
-  <dt><dfn attribute for="VideoFrame"><code>plane</code></dfn></dt>
-  <dd></dd>
+  <dt><dfn attribute for="VideoFrame"><code>data</code></dfn></dt>
+  <dd>
+
+    <div class="issue">
+    Consider using [[WebIDL#ArrayBufferView]] ("used to represent objects that
+    provide a view on to an [[WebIDL#ArrayBuffer]].") -- it might expose too
+    many format combinations though.
+    </div>
+
+  </dd>
+
+  <dt><dfn attribute for="VideoFrame"><code>width</code></dfn></dt>
+  <dd>Actual horizontal dimension of the data in the {{data}} object, in
+  pixels.</dd>
+  <dt><dfn attribute for="VideoFrame"><code>height</code></dfn></dt>
+  <dd>Actual vertical dimension of the data in the {{data}} object, in
+  pixels.</dd>
+
   <dt><dfn attribute for="VideoFrame"><code>format</code></dfn></dt>
-  <dd>This attribute specifies the concrete pixel format of {{plane}}; {{rgba}}
+  <dd>This attribute specifies the concrete pixel format of {{data}}; {{rgba}}
   is equivalent to the one of [[2dcontext#imagedata]].</dd>
 
   <dt><dfn attribute for="VideoFrame"><code>timecode</code></dfn></dt>
@@ -99,7 +128,8 @@ interface VideoFrame {
 <dl class="domintro">
   <dt><dfn enum-value for="PixelFormat"><code>rgba</code></dfn></dt>
   <dd>
-    Specifies one-dimensional data array in RGBA order, as integers in the range 0 to 255. This is the same as [[2dcontext#imagedata]].
+    Specifies one-dimensional data array in RGBA order, as integers in the range
+    0 to 255. This is the same format as the one in [[2dcontext#imagedata]].
   </dd>
   <dt><dfn enum-value for="PixelFormat"><code>yuv420</code></dfn></dt>
   <dd></dd>
