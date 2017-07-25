@@ -1,0 +1,154 @@
+<pre class="metadata">
+Title: Streams and MediaStreams integration
+Repository: wicg/streams-mediastreams-integration
+Status: ED
+ED: https://wicg.github.io/shape-detection-api
+Shortname: streams-mediastreams
+Level: 1
+Editor: Miguel Casas-Sanchez, w3cid 82825, Google Inc., mcasas@google.com
+Abstract: This document describes an API providing ...
+</a>
+</pre>
+
+<style>
+table {
+  border-collapse: collapse;
+  border-left-style: hidden;
+  border-right-style: hidden;
+  text-align: left;
+}
+table caption {
+  font-weight: bold;
+  padding: 3px;
+  text-align: left;
+}
+table td, table th {
+  border: 1px solid black;
+  padding: 3px;
+}
+</style>
+
+# Introduction # {#introduction}
+
+{{MediaStreams}} are ...
+Streams are ...
+Wouldn't it be cool to hook them up?
+
+## Use cases
+
+# {{MediaStreamTrack}} API extension # {#api}
+
+<pre class="idl">
+partial interface MediaStreamTrack {
+  // |any| should be ReadableStream, but that is not an idl type.
+  [CallWith=ScriptState] readonly attribute any readable;
+};
+</pre>
+
+<dl class="domintro">
+  <dt><dfn constructor for="MediaStreamTrack"><code>readable</code></dfn></dt>
+  <dd>Constructs a {{ReadableStreamReader}} out of the {{MediaStreamTrack}}.
+    <div class="note">
+    This is a note.
+    </div>
+  </dd>
+</dl>
+
+# VideoFrame # {#api}
+
+<pre class="idl">
+interface VideoFrame {
+  Array<ArrayBuffer> plane;
+  readonly attribute DOMHighResTimeStamp timecode;
+  readonly PixelFormat format;
+};
+</pre>
+
+<dl class="domintro">
+  <dt><dfn attribute for="VideoFrame"><code>plane</code></dfn></dt>
+  <dd></dd>
+
+  <dt><dfn attribute for="VideoFrame"><code>timecode</code></dfn></dt>
+  <dd>The difference between the timestamp of the first generated chunk of data
+  in {{VideoFrame}} and the timestamp of the first chunk in the first
+  {{VideoFrame}} produced by this reader.  Note that the {{VideoFrame/timecode}}
+  in the first produced {{VideoFrame}} does not need to be zero. </dd>
+
+  <dt><dfn attribute for="VideoFrame"><code>format</code></dfn></dt>
+  <dd></dd>
+</dl>
+
+## {{PixelFormat}} ### {#pixelformat-section}
+
+<pre class="idl">
+  enum PixelFormat {
+    "rgba",
+    "yuv420",
+  };
+</pre>
+
+<dl class="domintro">
+  <dt><dfn enum-value for="PixelFormat"><code>rgba</code></dfn></dt>
+  <dd></dd>
+  <dt><dfn enum-value for="PixelFormat"><code>yuv420</code></dfn></dt>
+  <dd></dd>
+</dl>
+
+# Examples # {#examples}
+
+<p class="note">
+Slightly modified/extended versions of these examples (and more) can be found in
+ e.g. <a href="about:blank/">this codepen collection</a>.
+</p>
+
+## VideoFrame reading and casting onto a &lt;canvas>
+
+<div class="example" highlight="javascript">
+<pre>
+let track = theStream.getVideoTracks()[0];
+
+track.readable.pipeTo(new WritableStream({
+  write(chunk) {
+    // TODO...
+  }
+  , close() {
+    console.log("All data successfully read!");
+  }
+  , abort(e) {
+    console.error("Uh, oh, something went wrong: ", e);
+  }
+}));
+</pre>
+</div>
+
+
+<pre class="anchors">
+spec: ECMAScript; urlPrefix: https://tc39.github.io/ecma262/#
+    type: interface
+        text: Array; url: sec-array-objects
+        text: Promise; url:sec-promise-objects
+        text: TypeError; url: sec-native-error-types-used-in-this-standard-typeerror
+</pre>
+
+<pre class="anchors">
+type: interface; text: Point2D; url: https://w3c.github.io/mediacapture-image/#Point2D;
+</pre>
+
+<pre class="anchors">
+type: interface; text: DOMString; url: https://heycam.github.io/webidl/#idl-DOMString; spec: webidl
+</pre>
+
+<pre class="link-defaults">
+spec: html
+    type: dfn
+        text: allowed to show a popup
+        text: in parallel
+        text: incumbent settings object
+</pre>
+
+<pre class="anchors">
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: MediaStream; url: mediastream
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: MediaStreamTrack; url: mediastreamtrack
+</pre>
+
