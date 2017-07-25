@@ -39,8 +39,8 @@ the browser. Users can access this data via reflexion on intermediate HTML
 elements such as &ltcanvas>, or via offline processors such as
 {{MediaRecorder}}.
 
-This spec describes the ways in which {{ReadableStream}}s can be created out of
-{{MediaStreamTrack}}s.
+This spec describes the ways in which {{ReadableStream|ReadableStreams}} can be created out of
+{{MediaStreamTrack|MediaStreamTracks}}.
 
 ## Use cases
 
