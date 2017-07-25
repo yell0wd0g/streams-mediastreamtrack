@@ -1,13 +1,15 @@
 <pre class="metadata">
 Title: Streams and MediaStreams integration
-Repository: wicg/streams-mediastreams-integration
+Repository: wicg/streams-mediastreamtrack
 Status: ED
-ED: https://wicg.github.io/shape-detection-api
-Shortname: streams-mediastreams
+ED: https://wicg.github.io/streams-mediastreamtrack
+Shortname: streams-mediastreamtrack
 Level: 1
 Editor: Miguel Casas-Sanchez, w3cid 82825, Google Inc., mcasas@google.com
-Abstract: This document describes an API providing ...
-</a>
+Editor: Adam Rice, Google Inc., ricea@google.com
+Abstract: This document describes an API providing a {{ReadableStream|ReadableStreams}} and associated data types out of {{MediaStreamTrack|MediaStreamTracks}}.
+
+Group: wicg
 </pre>
 
 <style>
@@ -30,9 +32,15 @@ table td, table th {
 
 # Introduction # {#introduction}
 
-{{MediaStreams}} are ...
-Streams are ...
-Wouldn't it be cool to hook them up?
+{{Stream|Streams}} are designed to provide real time data with powerful semantics.
+
+{{MediaStreamTrack|MediaStreamTracks}} are opaque handles to Real-Time video/audio transported in
+the browser. Users can access this data via reflexion on intermediate HTML
+elements such as &ltcanvas>, or via offline processors such as
+{{MediaRecorder}}.
+
+This spec describes the ways in which {{ReadableStream}}s can be created out of
+{{MediaStreamTrack}}s.
 
 ## Use cases
 
@@ -46,8 +54,8 @@ partial interface MediaStreamTrack {
 </pre>
 
 <dl class="domintro">
-  <dt><dfn constructor for="MediaStreamTrack"><code>readable</code></dfn></dt>
-  <dd>Constructs a {{ReadableStreamReader}} out of the {{MediaStreamTrack}}.
+  <dt><dfn attribute for="MediaStreamTrack"><code>readable</code></dfn></dt>
+  <dd>Constructs a {{ReadableStream}} out of the {{MediaStreamTrack}}.
     <div class="note">
     This is a note.
     </div>
@@ -58,15 +66,18 @@ partial interface MediaStreamTrack {
 
 <pre class="idl">
 interface VideoFrame {
-  Array<ArrayBuffer> plane;
+  readonly attribute Array<ArrayBuffer> plane;
+  readonly attribute PixelFormat format;
   readonly attribute DOMHighResTimeStamp timecode;
-  readonly PixelFormat format;
 };
 </pre>
 
 <dl class="domintro">
   <dt><dfn attribute for="VideoFrame"><code>plane</code></dfn></dt>
   <dd></dd>
+  <dt><dfn attribute for="VideoFrame"><code>format</code></dfn></dt>
+  <dd>This attribute specifies the concrete pixel format of {{plane}}; {{rgba}}
+  is equivalent to the one of [[2dcontext#imagedata]].</dd>
 
   <dt><dfn attribute for="VideoFrame"><code>timecode</code></dfn></dt>
   <dd>The difference between the timestamp of the first generated chunk of data
@@ -74,8 +85,6 @@ interface VideoFrame {
   {{VideoFrame}} produced by this reader.  Note that the {{VideoFrame/timecode}}
   in the first produced {{VideoFrame}} does not need to be zero. </dd>
 
-  <dt><dfn attribute for="VideoFrame"><code>format</code></dfn></dt>
-  <dd></dd>
 </dl>
 
 ## {{PixelFormat}} ### {#pixelformat-section}
@@ -89,7 +98,9 @@ interface VideoFrame {
 
 <dl class="domintro">
   <dt><dfn enum-value for="PixelFormat"><code>rgba</code></dfn></dt>
-  <dd></dd>
+  <dd>
+    Specifies one-dimensional data array in RGBA order, as integers in the range 0 to 255. This is the same as [[2dcontext#imagedata]].
+  </dd>
   <dt><dfn enum-value for="PixelFormat"><code>yuv420</code></dfn></dt>
   <dd></dd>
 </dl>
@@ -98,18 +109,28 @@ interface VideoFrame {
 
 <p class="note">
 Slightly modified/extended versions of these examples (and more) can be found in
- e.g. <a href="about:blank/">this codepen collection</a>.
+ e.g. <a href="about:blank">this codepen collection</a>.
 </p>
 
 ## VideoFrame reading and casting onto a &lt;canvas>
 
 <div class="example" highlight="javascript">
 <pre>
+// Assuming |theCanvas| and |theStream| exist already.
+
+let context = theCanvas.getContext("2d");
+
 let track = theStream.getVideoTracks()[0];
 
 track.readable.pipeTo(new WritableStream({
-  write(chunk) {
-    // TODO...
+  write(videoFrame) {
+    console.assert(videoFrame.format == "rgba");
+    if (videoFrame.format != "rgba")
+      return;
+
+    theCanvas.width  = videoFrame.width;
+    theCanvas.height = videoFrame.height;
+    context.putImageData(videoFrame, 0, 0);
   }
   , close() {
     console.log("All data successfully read!");
@@ -131,11 +152,7 @@ spec: ECMAScript; urlPrefix: https://tc39.github.io/ecma262/#
 </pre>
 
 <pre class="anchors">
-type: interface; text: Point2D; url: https://w3c.github.io/mediacapture-image/#Point2D;
-</pre>
-
-<pre class="anchors">
-type: interface; text: DOMString; url: https://heycam.github.io/webidl/#idl-DOMString; spec: webidl
+type: interface; text: DOMHighResTimeStamp; url: https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp;
 </pre>
 
 <pre class="link-defaults">
@@ -147,8 +164,17 @@ spec: html
 </pre>
 
 <pre class="anchors">
-urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: MediaStream; url: mediastream
+urlPrefix: https://streams.spec.whatwg.org/; type: interface; text: Stream;
 
-urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: MediaStreamTrack; url: mediastreamtrack
+urlPrefix: https://streams.spec.whatwg.org/#;
+    type: interface;
+        text: ReadableStream; url: readable-stream
+</pre>
+
+<pre class="anchors">
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#;
+    type: interface;
+        text: MediaStream; url: mediastream
+        text: MediaStreamTrack; url: mediastreamtrack
 </pre>
 
