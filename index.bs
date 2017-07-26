@@ -1,5 +1,5 @@
 <pre class="metadata">
-Title: Streams and MediaStreams integration
+Title: Streams and MediaStreamTracks
 Repository: wicg/streams-mediastreamtrack
 Status: ED
 ED: https://wicg.github.io/streams-mediastreamtrack
@@ -7,7 +7,7 @@ Shortname: streams-mediastreamtrack
 Level: 1
 Editor: Miguel Casas-Sanchez, w3cid 82825, Google Inc., mcasas@google.com
 Editor: Adam Rice, Google Inc., ricea@google.com
-Abstract: This document describes an API providing a {{ReadableStream|ReadableStreams}} and associated data types out of {{MediaStreamTrack|MediaStreamTracks}}.
+Abstract: This document describes an API providing {{ReadableStream|ReadableStreams}} (and associated data types) out of {{MediaStreamTrack|MediaStreamTracks}}.
 
 Group: wicg
 </pre>
@@ -32,20 +32,15 @@ table td, table th {
 
 # Introduction # {#introduction}
 
-{{Stream|Streams}} are designed to provide real time data with powerful
-semantics ([[!streams]]).
+{{Stream|Streams}} ([[!streams]]) are designed to provide real time streams of
+data with powerful semantics (e.g. built-in backpressure and queuing) to allow
+users to build higher-level abstractions. {{MediaStreamTrack|MediaStreamTracks}}
+([[!getusermedia]]) are opaque handles to Real-Time video/audio being
+transported in the browser. This spec describes the ways in which
+{{ReadableStream|ReadableStreams}} can be created out of
+{{MediaStreamTrack|MediaStreamTracks}}.
 
-{{MediaStreamTrack|MediaStreamTracks}} [[!getusermedia]] are opaque handles to
-Real-Time video/audio transported in the browser. Users can access this data via
-reflexion on intermediate HTML elements such as &ltcanvas>, or via offline
-processing (generated, e.g. using [[mediastream-recording]]).
-
-This spec describes the ways in which {{ReadableStream|ReadableStreams}} can be
-created out of {{MediaStreamTrack|MediaStreamTracks}}.
-
-## Use cases
-
-Blabla
+Please see the <a href="https://github.com/yellowdoge/streams-mediastreamtrack/blob/gh-pages/README.md">Readme/Explainer</a> in the repository for use cases and more rationale.
 
 # {{MediaStreamTrack}} API extension # {#api}
 
@@ -58,11 +53,10 @@ partial interface MediaStreamTrack {
 
 <dl class="domintro">
   <dt><dfn attribute for="MediaStreamTrack"><code>readable</code></dfn></dt>
-  <dd>Constructs a {{ReadableStream}} out of the {{MediaStreamTrack}}.
-    <div class="note">
-    This is a note.
-    </div>
-  </dd>
+  <dd>Constructs a {{ReadableStream}} out of the {{MediaStreamTrack}} following
+  the {{MediaStreamTrack}} lifetime. A {{ReadableStreamReader}} created out of
+  this will produce {{VideoFrame|VideoFrames}}. </dd>
+
 </dl>
 
 # VideoFrame # {#videoframe}
@@ -116,7 +110,7 @@ interface VideoFrame {
 
 </dl>
 
-## {{PixelFormat}} ### {#pixelformat-section}
+## {{PixelFormat}} ## {#pixelformat-section}
 
 <pre class="idl">
   enum PixelFormat {
@@ -136,11 +130,6 @@ interface VideoFrame {
 </dl>
 
 # Examples # {#examples}
-
-<p class="note">
-Slightly modified/extended versions of these examples (and more) can be found in
- e.g. <a href="about:blank">this codepen collection</a>.
-</p>
 
 ## VideoFrame reading and casting onto a &lt;canvas>
 
