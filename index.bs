@@ -36,9 +36,8 @@ table td, table th {
 data with powerful semantics (e.g. built-in backpressure and queuing) to allow
 users to build higher-level abstractions. {{MediaStreamTrack|MediaStreamTracks}}
 ([[!getusermedia]]) are opaque handles to Real-Time video/audio being
-transported in the browser. This spec describes the ways in which
-{{ReadableStream|ReadableStreams}} can be created out of
-{{MediaStreamTrack|MediaStreamTracks}}.
+transported in the browser. This document describes the ways in which
+{{ReadableStream|ReadableStreams}} can be created out of a {{MediaStreamTrack}}.
 
 Please see the <a href="https://github.com/yellowdoge/streams-mediastreamtrack/blob/gh-pages/README.md">Readme/Explainer</a> in the repository for use cases and more rationale.
 
