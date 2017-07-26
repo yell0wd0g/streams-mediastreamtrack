@@ -40,9 +40,9 @@ Making a `MediaStreamTrack` both a `ReadableStream` and a `WritableStream` (i.e.
 
 ## Current Related Efforts and Workarounds
 
-The most usual hack to access video data is to cast a given `MediaStreamTrack` onto a `<video>` element and onto a `<canvas>` in turn that is subsequently read back -- `<video>` elements provide no `drawed` event so it's up to the user to blit from `<video>` to `<canvas>` on a timely basis (see e.g. [this article](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Manipulating_video_using_canvas#Manipulating_the_video_frame_data)).  Moreover, usually reading from `<canvas>` implies a costly read back from GPU and potential pixel conversions needed.
+The most usual hack to access video data is to cast a given `MediaStreamTrack` onto a `<video>` element and this in turn onto a `<canvas>` that is subsequently read back -- `<video>` elements provide no `drawn` event so it's up to the user to blit from `<video>` to `<canvas>` on a timely basis (see e.g. [this article](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Manipulating_video_using_canvas#Manipulating_the_video_frame_data)).  Moreover, usually reading from `<canvas>` implies a costly read back from GPU and potential pixel conversions needed.
 
-Chrome [Pepper API](https://developer.chrome.com/native-client/pepper_dev) introduced and supports both [MediaStreamVideoTrack](https://developer.chrome.com/native-client/pepper_dev/cpp/classpp_1_1_media_stream_video_track) and [MediaStreamAudioTrack](https://developer.chrome.com/native-client/pepper_dev/cpp/classpp_1_1_media_stream_audio_track) addressing a similar situation as the one described here.
+Chrome [Pepper API](https://developer.chrome.com/native-client/pepper_dev) introduced and supports both [MediaStreamVideoTrack](https://developer.chrome.com/native-client/pepper_dev/cpp/classpp_1_1_media_stream_video_track) and [MediaStreamAudioTrack](https://developer.chrome.com/native-client/pepper_dev/cpp/classpp_1_1_media_stream_audio_track) addressing a similar situation as the one described.
 
 As mentioned before, WebAudio [ScriptProcessorNode](https://developer.mozilla.org/en/docs/Web/API/ScriptProcessorNode) (or its successor) enables similar use cases for audio.
 
