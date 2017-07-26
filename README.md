@@ -8,14 +8,13 @@ You're welcome to contribute! Let's make the Web rock our socks off!
 
 [`Streams`](https://streams.spec.whatwg.org/#stream) are designed to provide real time streams of data with powerful semantics (e.g. built-in backpressure and queuing) to allow users to build higher-level abstractions.
 
-[`MediaStreamTracks`](https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack) are opaque handles to Real-Time video or audio being transported in the browser. This media is produced or consumed via Sources and Sinks offered by the platform and represented in the following diagram
+[`MediaStreamTracks`](https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack) are opaque handles to Real-Time video or audio being transported in the browser. This media is produced or consumed via Sources and Sinks offered by the platform and represented in the following diagram:
 
 ![MST](mediastreamtrack_sources_and_sinks.png)
 
-It's worth noting here that the capabilities for Audio processing are
-quite developed thanks to the WebAudio bridge and its [ScriptProcessorNode](https://developer.mozilla.org/en/docs/Web/API/ScriptProcessorNode) that essentially enables what this Spec is looking for.
+Users' options when a given functionality is not readily available varies. The capabilities for Audio processing are quite developed thanks to the WebAudio bridge and its [ScriptProcessorNode](https://developer.mozilla.org/en/docs/Web/API/ScriptProcessorNode) that essentially enables what this Spec is looking for.
 
-For Video, however, not supported source/sink functionality forces users to resort to contortions such as reflexion on intermediate HTML elements (e.g. `<canvas>`, see [the Workarounds Section](#current-related-efforts-and-workarounds-wrench)) or offline processing (e.g. using [`MediaRecorder`](https://w3c.github.io/mediacapture-record/MediaRecorder.html)).  These approaches, however, lose the timing information, introduce friction in the interoperability and incur innecesary processing steps.
+For Video, however, unsupported source/sink functionality forces users to resort to contortions such as reflexion on intermediate HTML elements (e.g. `<canvas>`, see [the Workarounds Section](#current-related-efforts-and-workarounds)) or offline processing (e.g. using [`MediaRecorder`](https://w3c.github.io/mediacapture-record/MediaRecorder.html)).  These approaches, however, lose the timing information, introduce friction in the interoperability between elements and need unnecesary processing steps.
 
 This situation is made only more evident with the arrival of powerful programmable environments such as [WebAssembly](http://webassembly.org/) where users will naturally expect to be able to manipulate Real-Time media.
 
@@ -29,7 +28,7 @@ Use cases that depend explicitly on timing are enabled, e.g.:
 
 Whereas use cases that do not depend explicitly on timing are not enabled but are enhanced:
 
-- Producing per-frame analysis and transformations, e.g. average brightness, and the endless array of digital image processing algorithms, e.g. edge enhancement or chrome keying.
+- Producing per-frame analysis and transformations and the endless array of digital image processing algorithms, e.g. edge enhancement or chrome keying.
 - Adjusting the presentation timestamp of the media to speed up or slow down video, hence creating a timelapse or slow-motion effect.
 
 ### Possible future use cases ?
