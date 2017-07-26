@@ -18,6 +18,8 @@ For video, however, unsupported source/sink functionality forces users to resort
 
 This situation is made only more evident with the arrival of powerful programmable environments such as [WebAssembly](http://webassembly.org/) where users will naturally expect to be able to manipulate Real-Time media.
 
+This API reconciles these two existing ways to access Media on the browser, enhancing platform ergonomics and orthogonality while only attempting to define the minimum amount of new data types (VideoFrame).
+
 ## Use cases
 
 Use cases that depend explicitly on timing are enabled, e.g.:
